@@ -18,17 +18,17 @@ import subprocess
 @login_required
 def index():
     # user = {'username': 'Miguel'}
-    posts = [
-        {
-            'author': {'username': 'Jeff'},
-            'body': 'Beautiful day in Portland!'
-        },
-        {
-            'author': {'username': 'Susan'},
-            'body': 'The Avengers movie was so cool!'
-        }
-    ]
-    return render_template('index.html', title='Home',posts=posts)
+    # posts = [
+    #     {
+    #         'author': {'username': 'Jeff'},
+    #         'body': 'Beautiful day in Portland!'
+    #     },
+    #     {
+    #         'author': {'username': 'Susan'},
+    #         'body': 'The Avengers movie was so cool!'
+    #     }
+    # ]
+    return render_template('index.html')
 
 
 # Login Page Code

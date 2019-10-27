@@ -1,12 +1,12 @@
 {% extends "base.html" %}
 
 {% block header %}
-	<h1>{% block title %}SpellChecker{% endblock %}</h1>
+	<h1>{% block title %}Spell-Checker{% endblock %}</h1>
 {% endblock %}
 
 {% block content %}
     <form action="" method="post" novalidate>
-		<h2>Text Input</h2>
+		<h2>Input Text</h2>
         {{ form.hidden_tag() }}
 		<p>
             {{ form.inputtext.label }}<br>
@@ -17,7 +17,7 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-	<h2>Text Output</h2>
+	<h2>SpellCheck Results</h2>
 	<div id="textout">{{ textoutput }}</div>
 	<h2>Misspelled Words</h2>
 	<div id="misspelled">{{ textmisspell }}</div>
