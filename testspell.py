@@ -12,9 +12,6 @@ payload = {
     'password_2fa': '12345',
 }
 
-##Functions
-
-
 def startSession(url):
     session = requests.session()
     output = session.get(url)
