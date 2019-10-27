@@ -1,7 +1,10 @@
 {% extends "base.html" %}
 
+{% block header %}
+	<h1>{% block title %}Register{% endblock %}</h1>
+{% endblock %}
+
 {% block content %}
-    <h1>Register</h1>
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
@@ -25,13 +28,6 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
-        <p>
-            {{ form.password2.label }}<br>
-            {{ form.password2(size=32) }}<br>
-            {% for error in form.password2.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
          <p>
             {{ form.password_2fa.label }}<br>
             {{ form.password_2fa(size=32) }}<br>
@@ -41,4 +37,5 @@
         </p>
         <p>{{ form.submit() }}</p>
     </form>
+    <div id="success" style="display: none;">{{ flash_result }}</div>
 {% endblock %}

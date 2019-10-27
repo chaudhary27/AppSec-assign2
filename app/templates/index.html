@@ -1,8 +1,18 @@
 {% extends "base.html" %}
 
+{% block header %}
+	<h1>{% block title %}
+	{% if current_user.is_anonymous %}
+    AppSec
+    {% else %}
+    Welcome! {{ current_user.username }}!
+    {% endif %}
+	{% endblock %}</h1>
+{% endblock %}
+
 {% block content %}
-    <h1>Hi, {{ current_user.username }}!</h1>
-    {% for post in posts %}
-    <div><p>{{ post.author.username }} says: <b>{{ post.body }}</b></p></div>
-    {% endfor %}
+	<p>One Stop Shop for Spell Checking.</p>
+	<p>Login:  <a href="{{ url_for('login') }}">login</a></p>
+	<p>Register: <a href="{{ url_for('register') }}">register</a></p>
+
 {% endblock %}

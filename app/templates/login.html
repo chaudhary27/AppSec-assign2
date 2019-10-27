@@ -1,7 +1,13 @@
 {% extends "base.html" %}
 
+{% block header %}
+	<h1>{% block title %}Sign In{% endblock %}</h1>
+{% endblock %}
+
 {% block content %}
-    <h1>Sign In</h1>
+    {% if 'Success' in login_flash %}
+		<p>Now you can try <a href="{{ url_for('spellcheck') }}">SpellCheck</a></p>
+	{% endif %}
     <form action="" method="post" novalidate>
         {{ form.hidden_tag() }}
         <p>
@@ -18,8 +24,16 @@
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
+        <p>
+            {{ form.password_2fa.label }}<br>
+            {{ form.password_2fa(size=32) }}<br>
+            {% for error in form.password_2fa.errors %}
+            <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
         <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
         <p>{{ form.submit() }}</p>
     </form>
      <p>New User? <a href="{{ url_for('register') }}">Click to Register!</a></p>
+     <div id="result" style="display: none;">{{ login_flash }}</div>
 {% endblock %}
