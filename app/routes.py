@@ -100,5 +100,5 @@ def spellcheck():
 		textmisspell = textoutput.stdout.replace("\n", ", ")[:-2]
 		if textmisspell == "":
 			textmisspell = "No words found to be misspelled."
-		return render_template('spell_check.html', textoutput=textoutput.stdout, textmisspell=textmisspell, form=form)
+		return render_template('spellcheck.html', textoutput=textoutput.stdout, textmisspell=textmisspell, form=form)
 	return render_template('spellcheck.html', form=form)
