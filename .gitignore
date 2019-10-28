@@ -3,5 +3,5 @@ app.db
 a.out
 wordlist.txt
 .git
-.tox
-venv
+tox.ini
+venv/
