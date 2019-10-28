@@ -97,6 +97,6 @@ def spellcheck():
 		textoutput = subprocess.run(['./a.out', 'userinput.txt', 'wordlist.txt'], stdout=subprocess.PIPE, check=True, universal_newlines=True)
 		textmisspell = textoutput.stdout.replace("\n", ", ")[:-2]
 		if textmisspell == "":
-			textmisspell = "No words were misspelled."
+			textmisspell = "No words found to be misspelled."
 		return render_template('spell_check.html', textoutput=textoutput.stdout, textmisspell=textmisspell, form=form)
 	return render_template('spellcheck.html', form=form)

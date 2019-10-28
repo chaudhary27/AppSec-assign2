@@ -1,0 +1,7 @@
+__pycache__
+app.db
+a.out
+wordlist.txt
+.git
+.tox
+venv
