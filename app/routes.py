@@ -15,7 +15,7 @@ import subprocess
 
 # Index Page Code
 @app.route('/index')
-@login_required
+# @login_required
 def index():
     # user = {'username': 'Miguel'}
     # posts = [
@@ -35,8 +35,8 @@ def index():
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_flash = ''
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('index'))
     form = LoginForm()
     if form.validate_on_submit():
         user = User.query.filter_by(username=form.username.data).first()
@@ -49,7 +49,7 @@ def login():
             login_flash = 'Two-factor failure'
             flash('Two factor failed!')
             return render_template('login.html', login_flash=login_flash, form=form)
-        login_flash = 'Success'
+        login_flash = 'success'
         flash('You are loggin in!')
         login_user(user)
 
@@ -68,8 +68,8 @@ def logout():
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     flash_result = ''
-    if current_user.is_authenticated:
-        return redirect(url_for('index'))
+    # if current_user.is_authenticated:
+    #     return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         user = User(username=form.username.data, email=form.email.data, password_2fa=form.password_2fa.data)
