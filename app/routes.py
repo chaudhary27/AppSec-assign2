@@ -43,11 +43,12 @@ def login():
         if user is None or not user.check_password(form.password.data):
             login_flash = 'Incorrect'
             flash('Invalid username or password')
-            return redirect(url_for('login'))
+            # return redirect(url_for('login'))
+            return render_template('login.html', login_flash=login_flash, form=form)
         if not user.password_2fa == form.password_2fa.data:
             login_flash = 'Two-factor failure'
             flash('Two factor failed!')
-            return redirect(url_for('login'))
+            return render_template('login.html', login_flash=login_flash, form=form)
         login_flash = 'Success'
         flash('You are loggin in!')
         login_user(user)
@@ -57,7 +58,7 @@ def login():
         # if not next_page or url_parse(next_page).netloc != '':
         #     next_page = url_for('index')
         # return redirect(next_page)
-    return render_template('login.html', title='Sign In', form=form)
+    return render_template('login.html', login_flash=login_flash, form=form)
 
 @app.route('/logout')
 def logout():
@@ -78,7 +79,8 @@ def register():
         flash_result = 'success'
         flash(flash_result)
         flash('Congratulations, you are now a registered user!, please log in')
-        return redirect(url_for('login'))
+        # return redirect(url_for('login'))
+        return render_template('register.html', flash_result=flash_result, form=form)
     else:
         flash_result = 'failure'
         flash(flash_result)
