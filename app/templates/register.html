@@ -8,34 +8,27 @@
     <form action="" method="post">
         {{ form.hidden_tag() }}
         <p>
-            {{ form.username.label }}<br>
-            {{ form.username(size=32) }}<br>
-            {% for error in form.username.errors %}
+            {{ form.uname.label }}<br>
+            {{ form.uname(size=32) }}<br>
+            {% for error in form.uname.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.email.label }}<br>
-            {{ form.email(size=64) }}<br>
-            {% for error in form.email.errors %}
+            {{ form.pword.label }}<br>
+            {{ form.pword(size=32) }}<br>
+            {% for error in form.pword.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>
-            {{ form.password.label }}<br>
-            {{ form.password(size=32) }}<br>
-            {% for error in form.password.errors %}
-            <span style="color: red;">[{{ error }}]</span>
-            {% endfor %}
-        </p>
-         <p>
-            {{ form.password_2fa.label }}<br>
-            {{ form.password_2fa(size=32) }}<br>
-            {% for error in form.password_2fa.errors %}
+            {{ form.twoFA.label }}<br>
+            {{ form.twoFA(size=11) }}<br>
+            {% for error in form.twoFA.errors %}
             <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
         </p>
         <p>{{ form.submit() }}</p>
     </form>
-    <div id="success" style="display: none;">{{ flash_result }}</div>
+	<div id="success" style="display: none;">{{ regResult }}</div>
 {% endblock %}

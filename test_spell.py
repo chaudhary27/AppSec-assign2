@@ -44,8 +44,8 @@ def checkTag(output, tagID):
 def delUser(creds):
     from app import app, db
     from app.models import User
-    acct = creds.get('uname')
-    User.query.filter_by(uname=acct).delete()
+    acct = creds.get('username')
+    User.query.filter_by(username=acct).delete()
     db.session.commit()
 
 

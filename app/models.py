@@ -1,34 +1,46 @@
-from datetime import datetime
-from app import db
+from app import db, login
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import UserMixin
-from app import login
+
 
 class User(UserMixin, db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    username = db.Column(db.String(64), index=True, unique=True)
-    email = db.Column(db.String(120), index=True, unique=True)
-    password_hash = db.Column(db.String(128))
-    password_2fa = db.Column(db.String(11))
-    posts = db.relationship('Post', backref='author', lazy='dynamic')
-
-    def set_password(self, password):
-        self.password_hash = generate_password_hash(password)
-
-    def check_password(self, password):
-        return check_password_hash(self.password_hash, password)
+    id = db.Column(db.Integer(), unique=True, nullable=False, primary_key=True)
+    uname = db.Column(db.String(64), index=True, unique=True, nullable=False)
+    pword_hash = db.Column(db.String(128), unique=False, nullable=False)
+    two_fa = db.Column(db.String(11), unique=False, nullable=True)
+    admin_role = db.Column(db.Boolean(), unique=False,nullable=False, default=False)
 
     def __repr__(self):
-        return '<User {}>'.format(self.username)
+        return f"User({self.id!r},{self.uname!r},{self.pword_hash!r},{self.two_fa!r},{self.admin_role!r})"
 
-class Post(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
-    body = db.Column(db.String(140))
-    timestamp = db.Column(db.DateTime, index=True, default=datetime.utcnow)
-    user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
+    def set_password(self, pword):
+        self.pword_hash = generate_password_hash(pword)
+
+    def check_password(self, pword):
+        return check_password_hash(self.pword_hash, pword)
+
+    #def is_admin(self):
+    #    return self.admin_role == True
+
+
+class Spell(UserMixin, db.Model):
+    id = db.Column(db.Integer(), unique=True, nullable=False, primary_key=True)
+    uname = db.Column(db.String(64), unique=False, nullable=False)
+    query_text = db.Column(db.String(100000), unique=False, nullable=False)
+    query_results = db.Column(db.String(100000), unique=False, nullable=False)
 
     def __repr__(self):
-        return '<Post {}>'.format(self.body)
+        return f"User({self.id!r},{self.uname!r},{self.query_text!r},{self.query_results!r})"
+
+
+class TimeLog(UserMixin, db.Model):
+    id = db.Column(db.Integer(), unique=True, nullable=False, primary_key=True)
+    uname = db.Column(db.String(64), unique=False, nullable=False)
+    login_time = db.Column(db.DateTime)
+    logout_time = db.Column(db.DateTime, default=None)
+
+    def __repr__(self):
+        return f"User({self.id!r},{self.uname!r},{self.login_time!r},{self.logout_time!r})"
 
 
 @login.user_loader

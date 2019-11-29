@@ -1,27 +1,29 @@
 <html>
     <title>
-		{% block title %}{% endblock %} NYU AppSec - Assign2
-	</title>
+        {% block title %}{% endblock %} NYU AppSec Class Assign
+    </title>
     <section class="menuBar">
         <div>
-			<a href="{{ url_for('index') }}">Home</a>
-			{% if current_user.is_anonymous %}
-			<a href="{{ url_for('login') }}">Login</a>
-			{% else %}
-			<a href="{{ url_for('logout') }}">Logout</a>
-			{% endif %}
-			<a href="{{ url_for('spellcheck') }}">Spellcheck</a>
-		</div>
-		<hr>
-	</section>
-	<section class="content">
-		<head>
-			{% block header %}{% endblock %}
-		</head>
-		
-		{% for message in get_flashed_messages() %}
-			<div class="messages">{{ message }}</div>
-		{% endfor %}
+            <a href="{{ url_for('index') }}">Home</a>
+            {% if current_user.is_anonymous %}
+            <a href="{{ url_for('login') }}">Login</a>
+            {% else %}
+            <a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
+            <a href="{{ url_for('login_history') }}">login history</a>
+            <a href="{{ url_for('spellcheck') }}">spell check</a>
+            <a href="{{ url_for('history') }}">query history</a>
+        </div>
+        <hr>
+    </section>
+    <section class="content">
+        <head>
+            {% block header %}{% endblock %}
+        </head>
+
+        {% for message in get_flashed_messages() %}
+            <div class="messages">{{ message }}</div>
+        {% endfor %}
         {% block content %}{% endblock %}
-    </section>    
+    </section>
 </html>
